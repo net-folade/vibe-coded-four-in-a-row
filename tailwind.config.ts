@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Game specific colors
+				player1: '#ea384c', // Red
+				player2: '#1EAEDB', // Blue
+				board: '#333333', // Dark gray for the board
+				empty: '#F5F5F5', // Light color for empty cells
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +90,16 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'drop-piece': {
+					'0%': { transform: 'translateY(-400%)', opacity: '1' },
+					'100%': { transform: 'translateY(0)', opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'drop-piece': 'drop-piece 0.5s ease-in-out'
 			}
 		}
 	},
