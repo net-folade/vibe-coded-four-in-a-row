@@ -1,3 +1,4 @@
+
 import { Board, GameState, Player } from "@/types/game";
 
 export const ROWS = 6;
@@ -19,7 +20,7 @@ export const dropPiece = (gameState: GameState, col: number): GameState => {
   // Clone the current game state
   const newState = JSON.parse(JSON.stringify(gameState)) as GameState;
   
-  // If game is already over, don't allow more moves
+  // If game is already over or paused, don't allow more moves
   if (newState.gameStatus !== 'playing') {
     return newState;
   }

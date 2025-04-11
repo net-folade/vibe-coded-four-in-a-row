@@ -4,11 +4,12 @@ import { Player } from "@/types/game";
 
 interface GameTimerProps {
   isActive: boolean;
+  isPaused: boolean;
   onTimeExpired: () => void;
   currentPlayer: Player;
 }
 
-const GameTimer = ({ isActive, onTimeExpired, currentPlayer }: GameTimerProps) => {
+const GameTimer = ({ isActive, isPaused, onTimeExpired, currentPlayer }: GameTimerProps) => {
   const [timeLeft, setTimeLeft] = useState(20);
   
   useEffect(() => {
@@ -17,7 +18,7 @@ const GameTimer = ({ isActive, onTimeExpired, currentPlayer }: GameTimerProps) =
   }, [currentPlayer]);
   
   useEffect(() => {
-    if (!isActive) return;
+    if (!isActive || isPaused) return;
     
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
@@ -31,7 +32,7 @@ const GameTimer = ({ isActive, onTimeExpired, currentPlayer }: GameTimerProps) =
     }, 1000);
     
     return () => clearInterval(timer);
-  }, [isActive, onTimeExpired]);
+  }, [isActive, isPaused, onTimeExpired]);
   
   // Format time as mm:ss
   const formatTime = (time: number): string => {

@@ -14,6 +14,13 @@ const FourInARow = () => {
     setGameState(resetGame());
   };
   
+  const handlePause = () => {
+    setGameState(prevState => ({
+      ...prevState,
+      gameStatus: prevState.gameStatus === 'paused' ? 'playing' : 'paused'
+    }));
+  };
+  
   // Auto-switch players when timer expires
   const handleTimeExpired = () => {
     if (gameState.gameStatus !== 'playing') return;
@@ -37,11 +44,16 @@ const FourInARow = () => {
       
       <GameTimer 
         isActive={gameState.gameStatus === 'playing'} 
+        isPaused={gameState.gameStatus === 'paused'}
         onTimeExpired={handleTimeExpired}
         currentPlayer={gameState.currentPlayer}
       />
       
-      <GameStatus gameState={gameState} onReset={handleReset} />
+      <GameStatus 
+        gameState={gameState} 
+        onReset={handleReset} 
+        onPause={handlePause}
+      />
       
       <GameBoard gameState={gameState} setGameState={setGameState} />
       
